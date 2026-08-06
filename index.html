@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Petit jeu</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(#fff0dc,#ffffff);
+text-align:center;
+color:#333;
+}
+
+.container{
+padding:20px;
+}
+
+.card{
+background:white;
+max-width:500px;
+margin:25px auto;
+padding:25px;
+border-radius:25px;
+box-shadow:0 5px 20px #ccc;
+}
+
+h1,h2{
+color:#a65b00;
+}
+
+button{
+background:#a65b00;
+color:white;
+border:0;
+padding:15px 25px;
+border-radius:30px;
+font-size:17px;
+margin:10px;
+}
+
+.hidden{
+display:none;
+}
+
+.text{
+font-size:18px;
+line-height:1.6;
+}
+
+
+.gratte{
+background:#b58a52;
+color:white;
+padding:40px 20px;
+border-radius:20px;
+font-size:22px;
+cursor:pointer;
+}
+
+
+.reveal{
+display:none;
+background:#fff5e6;
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+}
+
+
+.coffres{
+display:flex;
+justify-content:center;
+gap:10px;
+}
+
+.coffre{
+font-size:45px;
+cursor:pointer;
+}
+
+
+.carte{
+background:#e8f2ff;
+padding:20px;
+border-radius:20px;
+font-size:20px;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="card">
+
+<h1>✨ Petit jeu ✨</h1>
+
+<p class="text">
+
+Bonjour Aziza...
+
+<br><br>
+
+J'aurais pu t'envoyer un simple message.
+Mais je pense que certaines invitations méritent un peu plus d'attention...
+
+<br><br>
+
+Prête à jouer ?
+
+</p>
+
+
+<button onclick="etape1()">
+🎲 Commencer
+</button>
+
+</div>
+
+
+
+<div id="etape1" class="card hidden">
+
+<h2>🎫 Étape 1</h2>
+
+<p class="text">
+Premier grattage...
+</p>
+
+
+<div class="gratte" onclick="indice1()">
+✨ Gratte ici ✨
+</div>
+
+
+<div id="indice1" class="reveal">
+
+<b>Indice n°1</b>
+
+<br><br>
+
+Notre destination n'est pas en France 🇫🇷
+
+</div>
+
+
+<button onclick="etape2()">
+Continuer
+</button>
+
+
+</div>
+<div id="etape2" class="card hidden">
+
+<h2>🔐 Étape 2</h2>
+
+<p class="text">
+Trois coffres apparaissent...
+<br><br>
+Un seul contient le bon indice.
+</p>
+
+
+<div class="coffres">
+
+<div class="coffre" onclick="mauvaisCoffre()">
+📦
+</div>
+
+<div class="coffre" onclick="bonCoffre()">
+📦
+</div>
+
+<div class="coffre" onclick="mauvaisCoffre()">
+📦
+</div>
+
+</div>
+
+
+<p id="coffreResultat"></p>
+
+
+</div>
+
+
+
+
+<div id="etape3" class="card hidden">
+
+
+<h2>🗺️ Étape 3</h2>
+
+
+<p class="text">
+
+Une carte d'Italie apparaît...
+
+<br><br>
+
+De quel côté allons-nous ?
+
+</p>
+
+
+<div class="carte">
+
+🇮🇹 Italie
+
+<br><br>
+
+<button onclick="ouest()">
+Côte Ouest 🌊
+</button>
+
+
+<button onclick="est()">
+Côte Est 🌅
+</button>
+
+
+</div>
+
+
+<p id="carteResultat"></p>
+
+
+</div>
+
+
+
+
+
+<div id="etape4" class="card hidden">
+
+
+<h2>🧩 Étape 4</h2>
+
+
+<p class="text">
+Trois indices doivent être découverts...
+</p>
+
+
+
+<button onclick="indiceMer()">
+🌊 Carte 1
+</button>
+
+
+<button onclick="indiceTrain()">
+🚆 Carte 2
+</button>
+
+
+<button onclick="indiceVillage()">
+🏘️ Carte 3
+</button>
+
+
+<p id="indiceMer"></p>
+<p id="indiceTrain"></p>
+<p id="indiceVillage"></p>
+
+
+
+<button onclick="revelation()">
+Découvrir la suite
+</button>
+
+
+</div>
+<div id="etape5" class="card hidden">
+
+
+<h2>🎉 La révélation</h2>
+
+
+<p class="text">
+
+La dernière carte se dévoile...
+
+<br><br>
+
+❤️ <b>Les Cinque Terre</b> ❤️
+
+<br><br>
+
+🇮🇹 Un endroit magique entre mer et villages colorés.
+
+</p>
+
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Manarola_Cinque_Terre.jpg/640px-Manarola_Cinque_Terre.jpg" 
+style="width:100%;border-radius:20px;">
+
+
+<p class="text">
+
+
+Aziza...
+
+<br><br>
+
+Je sais que tout n'est pas simple entre nous.
+
+<br><br>
+
+Mais j'aimerais te proposer une parenthèse.
+
+<br><br>
+
+Rien d'extraordinaire.
+Juste partir tous les deux.
+
+<br><br>
+
+Dormir là où l'on trouvera de la place.
+Faire du camping si l'envie nous prend.
+
+<br><br>
+
+Marcher, rire, admirer les villages, regarder la mer...
+
+<br><br>
+
+Et simplement profiter du moment.
+
+<br><br>
+
+Est-ce que tu accepterais de vivre cette aventure avec moi ?
+
+</p>
+
+
+<button>
+❤️ Oui, je viens avec toi
+</button>
+
+
+<button>
+😊 J'ai besoin d'y réfléchir
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+function cacher(){
+
+let pages=document.querySelectorAll(".card");
+
+pages.forEach(function(p){
+p.style.display="none";
+});
+
+}
+
+
+function etape1(){
+
+cacher();
+
+document.getElementById("etape1").style.display="block";
+
+}
+
+
+
+function indice1(){
+
+document.getElementById("indice1").style.display="block";
+
+}
+
+
+
+function etape2(){
+
+cacher();
+
+document.getElementById("etape2").style.display="block";
+
+}
+
+
+
+function mauvaisCoffre(){
+
+document.getElementById("coffreResultat").innerHTML=
+"Ce coffre est vide... Essaie encore 😉";
+
+}
+
+
+
+function bonCoffre(){
+
+document.getElementById("coffreResultat").innerHTML=
+"Bravo ! 🎉<br><br>Notre destination est en Italie 🇮🇹";
+
+
+setTimeout(function(){
+
+cacher();
+
+document.getElementById("etape3").style.display="block";
+
+},1500);
+
+}
+
+
+
+function ouest(){
+
+document.getElementById("carteResultat").innerHTML=
+"Tu te rapproches... 🌊";
+
+
+setTimeout(function(){
+
+cacher();
+
+document.getElementById("etape4").style.display="block";
+
+},1200);
+
+
+}
+
+
+
+function est(){
+
+document.getElementById("carteResultat").innerHTML=
+"Pas tout à fait... Essaie encore 😉";
+
+}
+
+
+
+function indiceMer(){
+
+document.getElementById("indiceMer").innerHTML=
+"🌊 La mer y est magnifique.";
+
+}
+
+
+
+function indiceTrain(){
+
+document.getElementById("indiceTrain").innerHTML=
+"🚆 Le train est le meilleur moyen de s'y déplacer.";
+
+}
+
+
+
+function indiceVillage(){
+
+document.getElementById("indiceVillage").innerHTML=
+"🏘️ Ce sont cinq villages colorés.";
+
+}
+
+
+
+function revelation(){
+
+cacher();
+
+document.getElementById("etape5").style.display="block";
+
+}
+
+
+</script>
+
+
+</body>
+</html>
